@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-name: $(major).$(minor).$(date:yy)$(DayOfYear)$(rev:.r)
+name: $(major).$(minor).$(date:yy)$(DayOfYear)$(rev:r)
 
 steps:
 - task: CmdLine@2
@@ -41,7 +41,7 @@ steps:
     RegEx: '@@PATCH@@'
     IgnoreCase: true
     MultiLine: true
-    ValueToReplace: '$(date:yy)$(DayOfYear)$(rev:.r)'
+    ValueToReplace: '$(date:yy)$(DayOfYear)$(rev:r)'
   displayName: 'update patch version @ task.json'
 
 - task: RegExMatchReplace@2
@@ -50,7 +50,7 @@ steps:
     RegEx: '@@VERSION@@'
     IgnoreCase: true
     MultiLine: true
-    ValueToReplace: '$(major).$(minor).$(date:yy)$(DayOfYear)$(rev:.r)'
+    ValueToReplace: '$(major).$(minor).$(date:yy)$(DayOfYear)$(rev:r)'
   displayName: 'update version @ vss-extension.json'
 
 - task: CmdLine@2
