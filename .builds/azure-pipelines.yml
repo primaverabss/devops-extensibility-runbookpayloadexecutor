@@ -14,7 +14,7 @@ name: $(major).$(minor).$(date:yy)$(DayOfYear)$(rev:.r)
 steps:
 - task: CmdLine@2
   inputs:
-    script: 'npm install -g tfx-cli'
+    script: 'sudo npm install -g tfx-cli'
   displayName: 'install tfx cli'
 
 - task: RegExMatchReplace@2
