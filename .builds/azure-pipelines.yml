@@ -11,7 +11,7 @@ pool:
 
 variables:
 - name: patch
-  value: "$(date:yy)$(DayOfYear)$(rev:r)"
+  value: "$(rev:r)"
 
 name: $(major).$(minor).$(patch)
 
