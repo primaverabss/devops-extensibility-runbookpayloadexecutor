@@ -9,9 +9,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-   patch: $(rev:r)
-
 name: $(major).$(minor).$(rev:r)
 
 steps:
