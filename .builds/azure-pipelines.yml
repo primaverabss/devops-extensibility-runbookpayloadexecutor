@@ -17,6 +17,42 @@ steps:
     script: 'npm install -g tfx-cli'
   displayName: 'install tfx cli'
 
+- task: RegExMatchReplace@2
+  inputs:
+    PathToFile: 'src/task/task.json'
+    RegEx: '@@MAJOR@@'
+    IgnoreCase: true
+    MultiLine: true
+    ValueToReplace: '$(major)'
+  displayName: 'update major version @ task.json'
+
+- task: RegExMatchReplace@2
+  inputs:
+    PathToFile: 'src/task/task.json'
+    RegEx: '@@MINOR@@'
+    IgnoreCase: true
+    MultiLine: true
+    ValueToReplace: '$(minor)'
+  displayName: 'update minor version @ task.json'
+
+- task: RegExMatchReplace@2
+  inputs:
+    PathToFile: 'src/task/task.json'
+    RegEx: '@@PATCH@@'
+    IgnoreCase: true
+    MultiLine: true
+    ValueToReplace: '$(date:yy)$(DayOfYear)$(rev:.r)'
+  displayName: 'update patch version @ task.json'
+
+- task: RegExMatchReplace@2
+  inputs:
+    PathToFile: 'vss-extension.json'
+    RegEx: '@@VERSION@@'
+    IgnoreCase: true
+    MultiLine: true
+    ValueToReplace: '$(major).$(minor).$(date:yy)$(DayOfYear)$(rev:.r)'
+  displayName: 'update version @ vss-extension.json'
+
 - task: CmdLine@2
   inputs:
     script: 'tfx extension create --manifest-globs vss-extension.json'
