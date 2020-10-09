@@ -1,0 +1,36 @@
+{
+    "manifestVersion": 1,
+    "id": "runbookpayloadexecutor-task",
+    "name": "Runbook Payload Executor",
+    "version": "@@MAJOR@@.@@MINOR@@.@@PATCH@@",
+    "publisher": "PrimaveraBSS",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Runbook Payload Executor",
+    "categories": [
+        "Build and Release"
+    ],
+    "icons": { 
+        "default": "images/icon.png"
+    },
+    "files": [
+        {
+            "path": "task"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "get-set-build-version-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "task"
+            }
+        }
+    ]
+}
