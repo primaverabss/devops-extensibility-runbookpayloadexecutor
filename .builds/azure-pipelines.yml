@@ -1,0 +1,35 @@
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - 'src'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: CmdLine@2
+  inputs:
+    script: 'npm install -g tfx-cli'
+  displayName: 'install tfx cli'
+
+- task: CmdLine@2
+  inputs:
+    script: 'tfx extension create --manifest-globs vss-extension.json'
+    workingDirectory: 'src'
+  displayName: 'create task vsix'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'src'
+    Contents: '**.vsix'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'copy files to artifact folder'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+  displayName: 'publish artifacts'
