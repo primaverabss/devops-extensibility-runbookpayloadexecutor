@@ -46,7 +46,7 @@ steps:
 
 - task: RegExMatchReplace@2
   inputs:
-    PathToFile: 'vss-extension.json'
+    PathToFile: 'src/vss-extension.json'
     RegEx: '@@VERSION@@'
     IgnoreCase: true
     MultiLine: true
