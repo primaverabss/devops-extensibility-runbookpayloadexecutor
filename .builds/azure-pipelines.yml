@@ -9,6 +9,8 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+name: $(major).$(minor).$(date:yy)$(DayOfYear)$(rev:.r)
+
 steps:
 - task: CmdLine@2
   inputs:
