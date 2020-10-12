@@ -24,7 +24,6 @@ steps:
       $patch = "$(build.buildnumber)"
       $patch = $patch.split('.')[2]
       Write-Host "##vso[task.setvariable variable=patch]$patch"
-      write-host $(patch)
 
 - task: RegExMatchReplace@2
   inputs:
