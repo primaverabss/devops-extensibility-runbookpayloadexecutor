@@ -8,7 +8,7 @@
         {
             "id": "Microsoft.VisualStudio.Services"
         }
-    ],    
+    ],
     "description": "Runbook Payload Executor",
     "categories": [
         "Azure Pipelines"
@@ -29,6 +29,9 @@
         {
             "path": "task"
         }
+    ],
+    "galleryFlags": [
+        "Public"
     ],
     "contributions": [
         {
