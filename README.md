@@ -3,7 +3,7 @@
 
 
 
-Executes JSON file payload into Azure Runbook.
+Executes JSON file payload into Azure Runbook with Enterprise Application Account.
 
 
 
