@@ -7,7 +7,13 @@
 
 Executes JSON file payload into Azure Runbook with an Enterprise Application Account.
 
+This taks maps payload keys with powershell runbook parameters input, i.e., define a json with a key "productId", runbook with input parameter "productId" and send it (json) in payload of this task.
 
+#### **Example:**
+
+- Map example:
+
+  ![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/taskrunbook.png)
 
 ### Task Input:
 
@@ -21,21 +27,3 @@ Executes JSON file payload into Azure Runbook with an Enterprise Application Acc
 - **FilePath**: Path to JSON payload file
 
 
-
-#### **Example:**
-
-- JSON file example:
-
-  ![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/1.PNG)
-
-- Execution:
-
-  ![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/2.png)
-
-  ###### ![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/3.png)
-
-![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/4.PNG)
-
-![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/5.PNG)
-
-![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/6.PNG)
