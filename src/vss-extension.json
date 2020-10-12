@@ -11,7 +11,7 @@
     ],    
     "description": "Runbook Payload Executor",
     "categories": [
-        "Build and Release"
+        "Azure Pipelines"
     ],
     "icons": { 
         "default": "images/icon.png"
