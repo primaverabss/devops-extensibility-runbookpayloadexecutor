@@ -7,7 +7,7 @@ Executes JSON file payload into Azure Runbook.
 
 
 
-### **Task Input:*
+### Task Input:
 
 - **SubscriptionId**: Enterprise Application Subscription Id with access to Automation Account 
 - **PrincipalClientId**: Enterprise Application Client Id
