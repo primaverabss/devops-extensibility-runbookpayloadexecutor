@@ -18,7 +18,7 @@
     },
     "content": {
         "details": {
-            "path": "https://raw.githubusercontent.com/primaverabss/devops-extensibility-runbookpayloadexecutor/main/README.md"
+            "path": "../README.md"
         }
     },
     "repository": {
