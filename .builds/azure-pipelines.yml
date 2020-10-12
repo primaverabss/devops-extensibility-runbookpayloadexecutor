@@ -26,6 +26,12 @@ steps:
       Write-Host "##vso[task.setvariable variable=patch]$patch"
   displayName: 'get revision number'
 
+- task: CopyFiles@2
+  inputs:
+    Contents: 'README.md'
+    TargetFolder: 'src/'
+  displayName: 'copy readme to task folder'
+
 - task: RegExMatchReplace@2
   inputs:
     PathToFile: 'src/task/task.json'
