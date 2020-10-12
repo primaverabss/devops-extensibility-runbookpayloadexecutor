@@ -1,2 +1,39 @@
-# devops-extensibility-runbookpayloadexecutor
-Runbook Payload Executor Task for Azure DevOps
+# Runbook Payload Executor
+![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/icon_min.png)
+
+
+
+Executes JSON file payload into Azure Runbook.
+
+
+
+### **Task Input:*
+
+- **SubscriptionId**: Enterprise Application Subscription Id with access to Automation Account 
+- **PrincipalClientId**: Enterprise Application Client Id
+- **PrincipalClientSecret**: Enterprise Application Client Secret
+- **AutomationAccountName**: Automation Account's name
+- **RunbookName**: Runbook's Name
+- **ResourceGroup**: Automation Account Resource Group
+- **TenantId**: Azure Tenant Id
+- **FilePath**: Path to JSON payload file
+
+
+
+#### **Example:**
+
+- JSON file example:
+
+  ![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/1.PNG)
+
+- Execution:
+
+  ![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/2.png)
+
+  ###### ![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/3.png)
+
+![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/4.PNG)
+
+![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/5.PNG)
+
+![](https://generalpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/6.PNG)
