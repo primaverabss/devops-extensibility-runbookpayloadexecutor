@@ -16,6 +16,15 @@
     "icons": { 
         "default": "images/icon.png"
     },
+    "content": {
+        "details": {
+            "path": "https://raw.githubusercontent.com/primaverabss/devops-extensibility-runbookpayloadexecutor/main/README.md"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/primaverabss/devops-extensibility-runbookpayloadexecutor"
+    },
     "files": [
         {
             "path": "task"
