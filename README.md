@@ -1,5 +1,5 @@
 # Runbook Payload Executor
-[![Build Status](https://dev.azure.com/primaveratec/SWE_Test/_apis/build/status/devops-extensibility/extensibility-runbookpayloadexecutor?branchName=main)](https://dev.azure.com/primaveratec/SWE_Test/_build/latest?definitionId=41&branchName=main)
+[![Build Status](https://dev.azure.com/primaverabss/DevOps/_apis/build/status/extensibility/azdevops/devops-extensibility-runbookpayloadexecutor?branchName=main)](https://dev.azure.com/primaverabss/DevOps/_build/latest?definitionId=34&branchName=main)
 
 ![](https://productpdsharedsa.blob.core.windows.net/runbookpayloadexecutor/icon_min.png)
 
