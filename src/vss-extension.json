@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "runbookpayloadexecutor-task",
     "name": "Runbook Payload Executor",
-    "version": "@@VERSION@@",
+    "version": "1.0.0",
     "publisher": "PrimaveraBSS",
     "targets": [
         {

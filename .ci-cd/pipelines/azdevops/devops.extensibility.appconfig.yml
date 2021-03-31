@@ -1,0 +1,112 @@
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - 'src'
+pool:
+  vmImage: windows-latest
+
+variables:
+  buildversion: 1.0.0
+  revision: $[counter(variables['buildversion'], 0)]
+  buildsConfigPath: '.ci-cd/pipelines/azdevops'
+
+steps:
+- task: CmdLine@2
+  inputs:
+    script: 'npm install -g tfx-cli'
+  displayName: 'install tfx cli'
+
+- task: oneLuckiDevJson2Variable@1
+  inputs:
+    jsonFile: '$(buildsConfigPath)/configuration.json'
+    shouldPrefixVariables: true
+    variablePrefix: 'buildvars'
+  displayName: load buildvars from configuration.json
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $divider = "."
+      $version = "$(buildvars.major-version)"+ "$divider" + "$(buildvars.minor-version)" + "$divider" + "$(revision)"
+      Write-Host $version
+      Write-Host "##vso[build.updatebuildnumber]$version"
+  displayName: update build number
+
+- task: CopyFiles@2
+  inputs:
+    Contents: 'README.md'
+    TargetFolder: 'src/'
+  displayName: 'copy readme to task folder'
+
+- task: SetJsonProperty@1
+  inputs:
+    JsonFile: 'src/vss-extension.json'
+    PropertyPath: 'version'
+    PropertyValue: '$(build.buildnumber)'
+  displayName: update version vss-extension
+
+- task: SetJsonProperty@1
+  inputs:
+    JsonFile: 'src/task/task.json'
+    PropertyPath: 'version.Major'
+    PropertyValue: '$(buildvars.major-version)'
+  displayName: update major version @ task.json
+
+- task: SetJsonProperty@1
+  inputs:
+    JsonFile: 'src/task/task.json'
+    PropertyPath: 'version.Minor'
+    PropertyValue: '$(buildvars.minor-version)'
+  displayName: update minor version @ task.json
+
+- task: SetJsonProperty@1
+  inputs:
+    JsonFile: 'src/task/task.json'
+    PropertyPath: 'version.Patch'
+    PropertyValue: '$(revision)'
+  displayName: update patch version @ task.json
+
+- task: SetJsonProperty@1
+  inputs:
+    JsonFile: 'src/task/task.json'
+    PropertyPath: 'author'
+    PropertyValue: '$(buildvars.company)'
+  displayName: update author @ task.json
+
+- task: SetJsonProperty@1
+  inputs:
+    JsonFile: 'src/vss-extension.json'
+    PropertyPath: 'publisher'
+    PropertyValue: '$(buildvars.company)'
+  displayName: update publisher vss-extension
+
+- task: CmdLine@2
+  inputs:
+    script: 'tfx extension create --manifest-globs vss-extension.json'
+    workingDirectory: 'src'
+  displayName: 'create task vsix'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(buildsConfigPath)'
+    Contents: '**.json'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'copy configuration to artifact folder'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'src'
+    Contents: '**.vsix'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'copy files to artifact folder'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+  displayName: 'publish artifacts'

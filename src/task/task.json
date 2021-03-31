@@ -10,9 +10,9 @@
     ],
     "author": "PRIMAVERABSS",
     "version": {
-        "Major": "@@MAJOR@@",
-        "Minor": "@@MINOR@@",
-        "Patch": "@@PATCH@@"
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 0
     },
     "releaseNotes": "",
     "demands": [],
