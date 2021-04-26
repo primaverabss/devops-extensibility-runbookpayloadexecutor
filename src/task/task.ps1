@@ -1,21 +1,12 @@
-﻿param(
-    [Parameter(Mandatory=$true)]
-    [string]$SubscriptionId,
-    [Parameter(Mandatory=$true)]
-    [string]$PrincipalClientId,
-    [Parameter(Mandatory=$true)]
-    [string]$PrincipalClientSecret,
-    [Parameter(Mandatory=$true)]
-    [string]$AutomationAccountName,
-    [Parameter(Mandatory=$true)]
-    [string]$RunbookName,
-    [Parameter(Mandatory=$true)]
-    [string]$ResourceGroup,
-    [Parameter(Mandatory=$true)]
-    [string]$TenantId,
-    [Parameter(Mandatory=$true)]
-    [string]$FilePath
-)
+﻿$SubscriptionId Get-VstsInput -Name SubscriptionId -Require;
+$PrincipalClientId Get-VstsInput -Name PrincipalClientId -Require;
+$PrincipalClientSecret Get-VstsInput -Name PrincipalClientSecret -Require;
+$AutomationAccountName Get-VstsInput -Name AutomationAccountName -Require;
+$RunbookName Get-VstsInput -Name RunbookName -Require;
+$ResourceGroup Get-VstsInput -Name ResourceGroup -Require;
+$TenantId Get-VstsInput -Name TenantId -Require;
+$FilePath Get-VstsInput -Name FilePath -Require;
+
 
 Write-Host "------------------------------------------"
 Write-Host "Subscription Id: $SubscriptionId"

@@ -99,7 +99,7 @@
     ],
     "instanceNameFormat": "Runbook Payload Executor",
     "execution": {
-        "PowerShell": {
+        "PowerShell3": {
             "target": "$(currentDirectory)\\task.ps1",
             "argumentFormat": "",
             "workingDirectory": "$(currentDirectory)"
