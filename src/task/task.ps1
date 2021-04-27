@@ -1,11 +1,11 @@
-﻿$SubscriptionId Get-VstsInput -Name SubscriptionId -Require;
-$PrincipalClientId Get-VstsInput -Name PrincipalClientId -Require;
-$PrincipalClientSecret Get-VstsInput -Name PrincipalClientSecret -Require;
-$AutomationAccountName Get-VstsInput -Name AutomationAccountName -Require;
-$RunbookName Get-VstsInput -Name RunbookName -Require;
-$ResourceGroup Get-VstsInput -Name ResourceGroup -Require;
-$TenantId Get-VstsInput -Name TenantId -Require;
-$FilePath Get-VstsInput -Name FilePath -Require;
+﻿$SubscriptionId = Get-VstsInput -Name SubscriptionId -Require;
+$PrincipalClientId = Get-VstsInput -Name PrincipalClientId -Require;
+$PrincipalClientSecret = Get-VstsInput -Name PrincipalClientSecret -Require;
+$AutomationAccountName = Get-VstsInput -Name AutomationAccountName -Require;
+$RunbookName = Get-VstsInput -Name RunbookName -Require;
+$ResourceGroup = Get-VstsInput -Name ResourceGroup -Require;
+$TenantId = Get-VstsInput -Name TenantId -Require;
+$FilePath = Get-VstsInput -Name FilePath -Require;
 
 
 Write-Host "------------------------------------------"
