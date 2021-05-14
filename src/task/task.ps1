@@ -6,6 +6,7 @@ $RunbookName = Get-VstsInput -Name RunbookName -Require;
 $ResourceGroup = Get-VstsInput -Name ResourceGroup -Require;
 $TenantId = Get-VstsInput -Name TenantId -Require;
 $FilePath = Get-VstsInput -Name FilePath -Require;
+$changeContext = Get-VstsInput -Name changeContext;
 
 
 Write-Host "------------------------------------------"
@@ -20,18 +21,27 @@ Write-Host "------------------------------------------"
 
 try {
     <# read Payload File #>
-    "[ INFO ] Reading payload file $FilePath"
-    $payload = Get-Content $FilePath | ConvertFrom-Json
+    "[ INFO ] Reading payload file $filePath"
+    $payload = Get-Content $filePath | ConvertFrom-Json
     "[ INFO ] Payload has been loaded."
 
     <# Login at Azure #>
     "[ INFO ] Logging in to Azure..."
     [SecureString]$userPassword = ConvertTo-SecureString -String $PrincipalClientSecret -AsPlainText -Force
-    $userCredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $PrincipalClientId, $userPassword
-    Add-AzureRmAccount -TenantId $TenantId -ServicePrincipal -SubscriptionId $SubscriptionId -Credential $userCredential 
-    Set-AzureRmContext -SubscriptionID $SubscriptionId
+    $userCredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $PrincipalClientID, $userPassword
+    Add-AzureRmAccount -TenantId $Tenantid -ServicePrincipal -SubscriptionId $SubscriptionId -Credential $userCredential 
     "[ INFO ] Logged in."
     
+    <# Change context to CMSOperations.pd #>
+    if($changeContext -eq $null -or $changeContext -eq "") {
+        Set-AzureRmContext -SubscriptionId $SubscriptionId
+    }
+    else {
+        Set-AzureRmContext $changeContext
+    }
+    
+    "[ INFO ] Context updated"
+
     foreach ($pld in $payload) {
         <# Execute Runbook #>
         $params = @{}
@@ -49,11 +59,12 @@ try {
 
             <# Check Job Status #>
             if ($($status).Status -eq "Completed") {
-                Write-Host "[ INFO ] Runbook has been successfully executed!"
+                Write-Host "[ INFO ] Runbook has been has executed!"
                 break;    
             }
     
             if ($($status).Status -eq "Failed") {
+                Write-Host "[ FAILED ] $($status.Exception)"
                 Throw "[ FAILED ] Runbook has been failed!"
             }
         }

@@ -95,7 +95,16 @@
             "groupName": "general",
             "required": true,
             "helpMarkDown": "File Path to JSON Payload"
-        }
+        },
+        {
+            "name": "changeContext",
+            "type": "string",
+            "label": "Change context to subscription name",
+            "defaultValue": "CMSOperations.pd",
+            "groupName": "general",
+            "required": false,
+            "helpMarkDown": "Change subscription to CMSOperations"
+          }
     ],
     "instanceNameFormat": "Runbook Payload Executor",
     "execution": {
