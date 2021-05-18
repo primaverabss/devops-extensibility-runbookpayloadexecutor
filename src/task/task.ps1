@@ -30,6 +30,7 @@ try {
     [SecureString]$userPassword = ConvertTo-SecureString -String $PrincipalClientSecret -AsPlainText -Force
     $userCredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $PrincipalClientID, $userPassword
     Add-AzureRmAccount -TenantId $Tenantid -ServicePrincipal -SubscriptionId $SubscriptionId -Credential $userCredential 
+
     "[ INFO ] Logged in."
     
     <# Change context to CMSOperations.pd #>
@@ -37,7 +38,7 @@ try {
         Set-AzureRmContext -SubscriptionId $SubscriptionId
     }
     else {
-        Set-AzureRmContext "$changeContext"
+        Set-AzureRmContext -SubscriptionName $changeContext
     }
     
     "[ INFO ] Context updated"
