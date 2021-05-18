@@ -37,7 +37,7 @@ try {
         Set-AzureRmContext -SubscriptionId $SubscriptionId
     }
     else {
-        Set-AzureRmContext $changeContext
+        Set-AzureRmContext "$changeContext"
     }
     
     "[ INFO ] Context updated"
