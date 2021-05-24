@@ -10,7 +10,7 @@ pool:
 
 variables:
   buildversion: 1.0.0
-  revision: $[counter(variables['buildversion'], 0)]
+  revision: $[counter(variables['buildversion'], 1)]
   buildsConfigPath: '.ci-cd/pipelines/azdevops'
 
 steps:
