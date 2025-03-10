@@ -45,11 +45,14 @@ if ([string]::IsNullOrEmpty($changeContext)) {
 }
 Write-Host "[ INFO ] Context updated"
 
-az config set extension.use_dynamic_install=yes_without_prompt
-az config set extension.dynamic_install_allow_preview=true
+az config set core.only_show_errors=yes
 az config set core.allow_experimental=true
 az config set core.allow_bundled_experimental=true
+az config set extension.use_dynamic_install=yes_without_prompt
+az config set extension.dynamic_install_allow_preview=true
 
+Write-Host "[ INFO ] Installing Azure CLI extension"
+az extension add --name "automation"
 
 $originalWarningPreference = $WarningPreference
 $WarningPreference = "SilentlyContinue"
@@ -58,18 +61,16 @@ $WarningPreference = "SilentlyContinue"
 foreach ($pld in $payload) {
     Write-Host "[ INFO ] Executing runbook with payload: $pld"
     
-$params = @{}
-$pld.psobject.properties | ForEach-Object { $params[$_.Name] = $_.Value }
+    $params = @{}
+    $pld.psobject.properties | ForEach-Object { $params[$_.Name] = $_.Value }
 
-Write-Host "[ INFO ] Executing runbook with payload $pld"
-$jobId = az automation runbook start `
-    --automation-account-name $AutomationAccountName `
-    --resource-group $ResourceGroup `
-    --name $RunbookName `
-    --parameters (($params.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value) " }).TrimEnd())`
-    --query id -o tsv
-
-
+    Write-Host "[ INFO ] Executing runbook with payload $pld"
+    $jobId = az automation runbook start `
+        --automation-account-name $AutomationAccountName `
+        --resource-group $ResourceGroup `
+        --name $RunbookName `
+        --parameters (($params.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value) " }).TrimEnd())`
+        --query id -o tsv
 
     if ([string]::IsNullOrEmpty($jobId)) {
         Write-Error "[ ERROR ] Failed to start runbook"
