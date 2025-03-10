@@ -1,9 +1,0 @@
-{
-	"webSiteStorageSubscription" : "lithium.st",
-	"webSiteStorageAccountNamePrefix" : "lithiumdv",
-	"webSiteStorageResourceGroupName" : "lithium-dv-vis-rg",
-	"webSiteProduct" : "lithium",
-	"webSiteName" : "vis",
-	"webSiteVersion" : "001015001",
-	"webSiteEnvironment" : "dv"
-} 
