@@ -61,15 +61,14 @@ $WarningPreference = "SilentlyContinue"
 foreach ($pld in $payload) {
     Write-Host "[ INFO ] Executing runbook with payload: $pld"
     
-    $params = @{}
-    $pld.psobject.properties | ForEach-Object { $params[$_.Name] = $_.Value }
+    $parameterValue = ($pld.psobject.properties | ForEach-Object { "$($_.Name)=\""$($_.Value)\""" }).Trim()
+    Write-Host "[ INFO ] Parameters: $parameterValue"
 
-    Write-Host "[ INFO ] Executing runbook with payload $pld"
     $jobId = az automation runbook start `
-        --automation-account-name $AutomationAccountName `
         --resource-group $ResourceGroup `
+        --automation-account-name $AutomationAccountName `
         --name $RunbookName `
-        --parameters (($params.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value) " }).TrimEnd())`
+        --parameters $parameterValue `
         --query id -o tsv
 
     if ([string]::IsNullOrEmpty($jobId)) {
