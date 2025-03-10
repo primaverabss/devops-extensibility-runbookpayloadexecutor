@@ -47,6 +47,9 @@ Write-Host "[ INFO ] Context updated"
 
 az config set core.allow_experimental=true
 
+az config set core.allow_bundled_experimental=true
+
+
 $originalWarningPreference = $WarningPreference
 $WarningPreference = "SilentlyContinue"
 
