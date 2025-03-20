@@ -57,11 +57,19 @@ az extension add --name "automation"
 $originalWarningPreference = $WarningPreference
 $WarningPreference = "SilentlyContinue"
 
+function Format($value) {
+    if ($value -match "\s") {
+        return """""$value"""""
+    } else {
+        return "\""$value\"""
+    }
+}
+
 # Iterar sobre payloads e executar o runbook
 foreach ($pld in $payload) {
     Write-Host "[ INFO ] Executing runbook with payload: $pld"
     
-    $parameterValue = ($pld.psobject.properties | ForEach-Object { "$($_.Name)=\""$($_.Value)\""" }).Trim()
+    $parameterValue = ($pld.psobject.properties | ForEach-Object { "$($_.Name)=$(Format($_.Value))" }).Trim()
     Write-Host "[ INFO ] Parameters: $parameterValue"
 
     $jobId = az automation runbook start `
